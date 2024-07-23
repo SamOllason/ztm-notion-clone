@@ -48,7 +48,7 @@ export const BasicNode = ({
         changeNodeValue(index, textContent || '')
     }
 
-    // focus the current node if it has been clicked
+    // focus on the current node if it has been clicked
     const handleClick = () => {
         updateFocussedIndex(index)
     }
@@ -94,9 +94,9 @@ export const BasicNode = ({
             onClick={handleClick}
             onKeyDown={onKeyDown}
             contentEditable
-            // we will let the browser control the state of this component
-            // and we will use refs to update the data
             suppressContentEditableWarning
+            // we will let the browser control the state of this component
+            // and we will use refs to grab and update the data
             ref={nodeRef} // use this to keep track of focussed state and access DOM-managed state
             className={styles.node}
         />
