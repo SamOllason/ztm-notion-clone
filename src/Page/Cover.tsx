@@ -24,7 +24,7 @@ export const Cover = () => {
         <img src="/ztm-notes.png" alt="Cover" className={styles.image}/>
 
         {/* When click on button want to trigger click event on the input element below */}
-        <button onClick={onChangeCoverImage} className="styles.button">Change cover</button>
+        <button onClick={onChangeCoverImage} className={styles.button}>Change cover</button>
         {/* we want an 'invisible' input to have a custom bottom to allow user */}
         {/* to upload images when user clicks on bottom */}
         <input onChange={onCoverImageUpload} ref={fileInputRef} style={{display: "none"}} type="file"></input>
