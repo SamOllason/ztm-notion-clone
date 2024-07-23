@@ -1,13 +1,11 @@
-import { Cover } from "./Page/Cover";
-import { Title } from "./Page/Title";
+import { Page } from "./Page/Page";
 import './App.css';
 
 function App() {
   
   return (
     <>
-      <Title title='Title of page' changePageTitle={()=> {return}} addNode={()=>{return}} />
-      <Cover/>
+      <Page/>
     </>
   )
 }
