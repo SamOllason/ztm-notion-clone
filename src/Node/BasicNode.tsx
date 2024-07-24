@@ -2,15 +2,18 @@ import { useEffect, useRef, FormEventHandler, KeyboardEventHandler} from "react"
 import { NodeData } from "../utils/types"
 import { nanoid } from "nanoid";
 import styles from "./Node.module.css"
+import { useAppState } from "../state/AppStateContext"
 
 type BasicNodeProps = {
     node: NodeData;
     updateFocussedIndex(index:number): void //update the focussed node's index so we know what node is currently focussed
     isFocussed: boolean;
     index: number;
-    addNode(node: NodeData, index: number): void;
-    removeNodeByIndex(index: number): void;
-    changeNodeValue(index: number, value: string): void;
+
+    // note: these have been migrated to be managed via context
+    // addNode(node: NodeData, index: number): void;
+    // removeNodeByIndex(index: number): void;
+    // changeNodeValue(index: number, value: string): void;
 }
 
 export const BasicNode = ({
@@ -18,12 +21,15 @@ export const BasicNode = ({
     updateFocussedIndex,
     isFocussed,
     index,
-    addNode,
-    removeNodeByIndex,
-    changeNodeValue
+    // addNode,
+    // removeNodeByIndex,
+    // changeNodeValue
 }: BasicNodeProps) => {
 
     const nodeRef = useRef<HTMLDivElement>(null);
+
+    // get these from AppStateContext
+    const { changeNodeValue, removeNodeByIndex, addNode } = useAppState()
 
     useEffect(() => {
         if(isFocussed){
