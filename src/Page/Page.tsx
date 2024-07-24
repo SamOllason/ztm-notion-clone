@@ -1,10 +1,10 @@
 import { useFocussedNodeIndex } from "./usedFocussedNodeIndex";
 import { Cover } from "./Cover";
 import { Spacer } from "./Spacer";
-import { BasicNode } from "../Node/BasicNode";
 import { Title } from "./Title";
 import { nanoid } from "nanoid"
 import { useAppState } from "../state/AppStateContext";
+import { NodeTypeSwitcher } from "../Node/NodeTypeSwitcher";
 
 export const Page = () => {
 
@@ -41,14 +41,14 @@ export const Page = () => {
                 {/* pass in addNode function as we want to add nodes as user finished editing title */}
                 <Title addNode={addNode} title={title} changePageTitle={setTitle}/>
                 {nodes.map((node, index) => (
-                    <BasicNode
+                    <NodeTypeSwitcher
                         key={node.id}
                         node={node}
                         isFocussed={focussedNodeIndex === index}
                         updateFocussedIndex={setFocussedNodeIndex}
                         index={index}
 
-                        // note: we remove these as they now come from the AppStateContext
+                        // note: we removed these as they now come from the AppStateContext
                         // addNode={addNode}
                         // removeNodeByIndex={removeNodeByIndex}
                         // changeNodeValue={changeNodeValue}
