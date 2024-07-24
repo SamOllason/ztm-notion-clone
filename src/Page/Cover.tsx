@@ -10,7 +10,6 @@ export const Cover = () => {
         // we use refs to store an reference to the input element
         // note use of optional chaning as the element may be null
         fileInputRef.current?.click()
-
     }
 
     const onCoverImageUpload: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -21,13 +20,13 @@ export const Cover = () => {
 
     return(
         <div className={styles.cover}>
-        <img src="/ztm-notes.png" alt="Cover" className={styles.image}/>
+            <img src="/ztm-notes.png" alt="Cover" className={styles.image}/>
 
-        {/* When click on button want to trigger click event on the input element below */}
-        <button onClick={onChangeCoverImage} className={styles.button}>Change cover</button>
-        {/* we want an 'invisible' input to have a custom bottom to allow user */}
-        {/* to upload images when user clicks on bottom */}
-        <input onChange={onCoverImageUpload} ref={fileInputRef} style={{display: "none"}} type="file"></input>
+            {/* When click on button want to trigger click event on the input element below */}
+            <button onClick={onChangeCoverImage} className={styles.button}>Change cover</button>
+            {/* we want an 'invisible' input to have a custom bottom to allow user */}
+            {/* to upload images when user clicks on bottom */}
+            <input onChange={onCoverImageUpload} ref={fileInputRef} style={{display: "none"}} type="file"></input>
         </div>
     )
 }

@@ -10,7 +10,7 @@ export const useFocussedNodeIndex = ({nodes}: UseFocussedNodeIndexProps): [numbe
     const [ focussedNodeIndex, setFocussedNodeIndex ] =  useState(0);
 
     // inside the hook define a useEffect to keep track of the nodes and
-    // subscribe to keydown event listeners to detect when user has pressed arrow up
+    // subscribe to keydown event listeners to detect when user has pressed arrow up/down
     useEffect(() => {
 
         const onKeyDown = (event: KeyboardEvent) => {
@@ -34,6 +34,6 @@ export const useFocussedNodeIndex = ({nodes}: UseFocussedNodeIndexProps): [numbe
 
     // we return a tuple so the consumer of this hook can specify
     // the names of the fields that are returned by the hook
-    return [focussedNodeIndex, setFocussedNodeIndex]
+    return [ focussedNodeIndex, setFocussedNodeIndex ]
 
 }
