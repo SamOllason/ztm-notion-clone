@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import styles from "./Node.module.css";
 import { useAppState } from "../state/AppStateContext";
 import { CommandPanel } from "./CommandPanel";
+import cx from "classnames"
 
 type BasicNodeProps = {
     node: NodeData;
@@ -126,7 +127,7 @@ export const BasicNode = ({
                 // we will let the browser control the state of this component
                 // and we will use refs to grab and update the data
                 ref={nodeRef} // use this to keep track of focussed state and access DOM-managed state
-                className={styles.node}
+                className={cx(styles.node, styles[node.type])}
             />
         </>
     )
