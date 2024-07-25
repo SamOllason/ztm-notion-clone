@@ -1,8 +1,9 @@
-import { useEffect, useRef, FormEventHandler, KeyboardEventHandler} from "react"
-import { NodeData } from "../utils/types"
+import { useEffect, useRef, FormEventHandler, KeyboardEventHandler} from "react";
+import { NodeData, NodeType } from "../utils/types";
 import { nanoid } from "nanoid";
-import styles from "./Node.module.css"
-import { useAppState } from "../state/AppStateContext"
+import styles from "./Node.module.css";
+import { useAppState } from "../state/AppStateContext";
+import { CommandPanel } from "./CommandPanel";
 
 type BasicNodeProps = {
     node: NodeData;
@@ -28,8 +29,12 @@ export const BasicNode = ({
 
     const nodeRef = useRef<HTMLDivElement>(null);
 
+    // only show command panel if user has entered a slash and
+    // for node that is currently focussed (i.e. on line that user is currently on!)
+    const showCommandPanel = isFocussed && node?.value?.match(/^\//)
+
     // get these from AppStateContext
-    const { changeNodeValue, removeNodeByIndex, addNode } = useAppState()
+    const { changeNodeValue, changeNodeType, removeNodeByIndex, addNode } = useAppState()
 
     useEffect(() => {
         if(isFocussed){
@@ -94,17 +99,35 @@ export const BasicNode = ({
         }
     }
 
+    const parseCommand = (nodeType: NodeType) => {
+
+        if(nodeRef.current){
+            // change node type to the one we get from the argument
+            // then reset the node value
+            changeNodeType(index, nodeType)
+            nodeRef.current.textContent = ""
+        }
+
+    }
+
     return (
-        <div
-            onInput={handleInput}
-            onClick={handleClick}
-            onKeyDown={onKeyDown}
-            contentEditable
-            suppressContentEditableWarning
-            // we will let the browser control the state of this component
-            // and we will use refs to grab and update the data
-            ref={nodeRef} // use this to keep track of focussed state and access DOM-managed state
-            className={styles.node}
-        />
+        <>
+        {
+            showCommandPanel && (
+                <CommandPanel selectItem={parseCommand} nodeText={node.value}/>
+            )
+        }
+            <div
+                onInput={handleInput}
+                onClick={handleClick}
+                onKeyDown={onKeyDown}
+                contentEditable
+                suppressContentEditableWarning
+                // we will let the browser control the state of this component
+                // and we will use refs to grab and update the data
+                ref={nodeRef} // use this to keep track of focussed state and access DOM-managed state
+                className={styles.node}
+            />
+        </>
     )
 }

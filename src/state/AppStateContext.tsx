@@ -28,7 +28,6 @@ export const AppStateProvider = ({children, initialState}: AppStateProviderProps
             {children}
         </AppStateContext.Provider>
     )
-
 }
 
 // create a custom hook, using useContext, to make the context easier to work with

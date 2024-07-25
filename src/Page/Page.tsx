@@ -12,7 +12,7 @@ export const Page = () => {
    
     const [ focussedNodeIndex, setFocussedNodeIndex ] = useFocussedNodeIndex({nodes});
 
-    // NOTE: weget these values from the UseAppState hook instead now
+    // *** NOTE: we get these values from the UseAppState hook instead now: ***
     // const [ nodes, setNodes ] = useState<NodeData[]>([]);
     // const [ title, setTitle ] =  useState("Default Title")
     // const addNode = (node: NodeData, index: number) => {
