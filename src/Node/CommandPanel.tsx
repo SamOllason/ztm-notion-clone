@@ -25,9 +25,9 @@ const supportedNodeTypes: SupportedNodeType[] = [
 export const CommandPanel = ({selectItem, nodeText}: CommandPanelProps) => {
 
     // need to keep track of what element is currently selected
-    const [ selectedItemIndex, setSelectedItemIndex] = useState(0)
+    const [ selectedItemIndex, setSelectedItemIndex ] = useState(0)
 
-    //once panel is rendere we want to check if it overflows the bottom of the screen
+    // once panel is rendered we want to check if it overflows the bottom of the screen
     // and if it does then flip it and render above the node so it fits on screen
     const { overflows, ref } = useOverflowsScreenBottom()
 
@@ -49,6 +49,8 @@ export const CommandPanel = ({selectItem, nodeText}: CommandPanelProps) => {
     }, [ selectedItemIndex, selectItem ])
 
     // whenever nodetext changes we want to update the selected item index
+    // so that when user wants to add new node we are make it easier to add new node of the same type
+    // that is currently selected
     useEffect(() => {
         // normalise value and remove the slash that the user has entered (which triggers the panel)
         const normalisedValue = nodeText.toLowerCase().replace(/\//, "")
@@ -68,7 +70,6 @@ export const CommandPanel = ({selectItem, nodeText}: CommandPanelProps) => {
                     [styles.reverse] : overflows,
                 })
             }
-
             >
             <div className={styles.title}>Blocks</div>
             <ul>
