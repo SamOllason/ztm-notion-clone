@@ -4,11 +4,13 @@ import { Spacer } from "./Spacer";
 import { Title } from "./Title";
 import { nanoid } from "nanoid"
 import { useAppState } from "../state/AppStateContext";
-import { NodeTypeSwitcher } from "../Node/NodeTypeSwitcher";
+import { NodeContainer } from "../Node/NodeContainer";
+import { DndContext, DragOverlay, DragEndEvent } from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 
 export const Page = () => {
 
-    const { title, nodes, addNode, setTitle } = useAppState()
+    const { title, nodes, addNode, reorderNodes, setTitle } = useAppState()
    
     const [ focussedNodeIndex, setFocussedNodeIndex ] = useFocussedNodeIndex({nodes});
 
@@ -34,26 +36,40 @@ export const Page = () => {
     //     setNodes(newNodes)
     // }
 
+    const handleDragEvent = (event: DragEndEvent) => {
+        const { active, over } = event;
+        if(over?.id && active.id !== over?.id){
+            reorderNodes(active.id as string, over.id as string)
+        }
+
+    }
+
     return (
         <>
             <Cover/>
             <div>
                 {/* pass in addNode function as we want to add nodes as user finished editing title */}
                 <Title addNode={addNode} title={title} changePageTitle={setTitle}/>
-                {nodes.map((node, index) => (
-                    <NodeTypeSwitcher
-                        key={node.id}
-                        node={node}
-                        isFocussed={focussedNodeIndex === index}
-                        updateFocussedIndex={setFocussedNodeIndex}
-                        index={index}
 
-                        // note: we removed these as they now come from the AppStateContext
-                        // addNode={addNode}
-                        // removeNodeByIndex={removeNodeByIndex}
-                        // changeNodeValue={changeNodeValue}
-                        />
-                ))}
+                <DndContext onDragEnd={handleDragEvent}>
+                    <SortableContext items={nodes} strategy={verticalListSortingStrategy}>
+                        {nodes.map((node, index) => (
+                            <NodeContainer
+                                key={node.id}
+                                node={node}
+                                isFocussed={focussedNodeIndex === index}
+                                updateFocussedIndex={setFocussedNodeIndex}
+                                index={index}
+
+                                // note: we removed these as they now come from the AppStateContext
+                                // addNode={addNode}
+                                // removeNodeByIndex={removeNodeByIndex}
+                                // changeNodeValue={changeNodeValue}
+                                />
+                        ))}
+                    </SortableContext> 
+                    <DragOverlay/>
+                </DndContext>
                 <Spacer
                     handleClick={() => {
                         // want to add this element as the last in the list, at bottom of page
