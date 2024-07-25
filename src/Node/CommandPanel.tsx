@@ -82,7 +82,7 @@ export const CommandPanel = ({selectItem, nodeText}: CommandPanelProps) => {
                             onClick={() => selectItem(type.value)}
                             className={
                                 cx({
-                                    [sytles.selected]: selected
+                                    [styles.selected]: selected
                                 })
                             }
                         >{type.name}</li>
