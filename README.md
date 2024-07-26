@@ -4,7 +4,7 @@
 
 ![05 Basic Implementation-cropped](https://github.com/satansdeer/ztm-notion-clone/assets/450319/2940d0fb-2de9-42cb-815f-8383d0904ae4)
 
-Notion-like app that allows users to create notes and organize them in a tree structure.
+Notion-like app that allows users to creat and edit notes and organize them in a tree structure.
 
 ## Features
 
