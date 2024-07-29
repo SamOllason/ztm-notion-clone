@@ -3,12 +3,12 @@ import { Session } from "@supabase/supabase-js"
 import { createContext, ReactNode, useContext, useEffect, useState } from "react"
 
 type AuthSessionContextValue = {
-    // session: ReturnType<typeof supabase.auth.getSession>; // note: see below
+    // session: ReturnType<typeof supabase.auth.getSession>; // note: this was updated, see below
     session: Session | null;
     loading: boolean;
 }
 
-// note: fine to use empty object as initial value here as we are going
+// note: fine to use empty object as initial value here as we are ONLY going
 // to be using this to wrap our app. We use it to try and get the context value
 // that is not wrapped in the context
 const AuthSessionContext = createContext<AuthSessionContextValue>({} as AuthSessionContextValue)
