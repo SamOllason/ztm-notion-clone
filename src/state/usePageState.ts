@@ -1,16 +1,19 @@
 import { NodeData, NodeType, Page } from "../utils/types"
 import { useImmer } from "use-immer"
 import { arrayMove } from "@dnd-kit/sortable"
+import { useSyncedState } from "./useSyncedState"
+import { updatePage } from "../utils/updatePage"
 
 export const usePageState = (initialState: Page) => {
     // useImmer is similar to useState but makes it working with
     // complex objects in state a bit easier
-    const [ page, setPage ] = useImmer<Page>(initialState)
+
+    // const [ page, setPage ] = useImmer<Page>(initialState) // note: replaced this with useSyncedState
+    const [ page, setPage ] = useSyncedState<Page>(initialState, updatePage)
 
     const addNode = (node: NodeData, index: number) => {
         // we can mutate this 'draft' variable (representing state) and edit it 'in place',
-        // this is where immer is helpful - instead of having to 
-        // worry about creating an immutable object etc
+        // this is where immer is helpful - instead of having to worry about creating an immutable object etc
         setPage((draft) => {
             draft.nodes.splice(index, 0, node)
         });

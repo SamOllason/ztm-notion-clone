@@ -11,7 +11,7 @@ export const useOverflowsScreenBottom = () => {
 
     const [ overflows, setOverflows ] = useState(false)
 
-    // we want to calculate the overflow once the panel component has mounted
+    // we want to calculate the overflow **after** the panel component has mounted
     useEffect(() => {
         if(ref.current){
             // destructing assignment to get relevant vars
