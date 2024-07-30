@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { Auth } from "./auth/Auth"
 import { Private } from "./auth/Private"
 
-const initialState = createPage()
+// const initialState = createPage() // not needed since withInitialState() added
 
 function App() {
   return (
@@ -15,7 +15,8 @@ function App() {
         path="/:id" 
         element={
           <Private component={
-            <AppStateProvider initialState={initialState}>
+            // <AppStateProvider initialState={initialState}> // not needed since withInitialState() added
+            <AppStateProvider >
               <Page/>
             </AppStateProvider>
           }/>
@@ -24,7 +25,7 @@ function App() {
         path="/" 
         element={
           <Private component={
-            <AppStateProvider initialState={initialState}>
+            <AppStateProvider>
               <Page/>
             </AppStateProvider>
           }/>

@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { Page } from "../utils/types";
 import { usePageState } from "./usePageState"
+import { withInitialState } from "../state/withInitialState"
 
 // use the ReturnType utility type
 type AppStateContextType = ReturnType<typeof usePageState>
@@ -17,10 +18,11 @@ type AppStateProviderProps = {
 }
 
 // the app state provider component is what we wrap our application with
-export const AppStateProvider = ({children, initialState}: AppStateProviderProps) => {
+export const AppStateProvider = withInitialState<AppStateProviderProps>(
+    ({children, initialState}: AppStateProviderProps) => {
 
     // want to make the observable values and handlers from the provider availlable 
-    // to the page subtre
+    // to the page subtree
     const pageStateHandlers = usePageState(initialState)
 
     return (
@@ -28,7 +30,7 @@ export const AppStateProvider = ({children, initialState}: AppStateProviderProps
             {children}
         </AppStateContext.Provider>
     )
-}
+})
 
 // create a custom hook, using useContext, to make the context easier to work with
 export const useAppState = () => useContext(AppStateContext)
