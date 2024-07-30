@@ -11,7 +11,6 @@ type AppStateContextType = ReturnType<typeof usePageState>
 // while we are not wrapping the subtree of components with the context provider
 const AppStateContext = createContext<AppStateContextType>({} as AppStateContextType)
 
-
 type AppStateProviderProps = {
     children: React.ReactNode; // context wraps components subtree
     initialState: Page;
