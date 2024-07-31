@@ -3,7 +3,7 @@ import { useMatch } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { supabase } from "../supabaseClient"
 import startPageScaffold from "./startPageScaffold.json"
-import styles from "../utils.module.css"
+import styles from "../utils/utils.module.css"
 import { Loader } from "../components/Loader"
 
 type InjectedProps = {

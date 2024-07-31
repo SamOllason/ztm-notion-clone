@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 import { supabase } from "../supabaseClient"
 import { Loader } from "./Loader"
-import styles from "../utils.module.css"
+import styles from "../utils/utils.module.css"
 
 type FileImageProps = {
 	filePath: string
-} & React.ImgHTMLAttributes<HTMLImageElement>
+} & React.ImgHTMLAttributes<HTMLImageElement> // access the other props alongside filepath
 
 export const FileImage = ({filePath, ...props}: FileImageProps) => {
 	// image is the url that we can use on src tag

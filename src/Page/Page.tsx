@@ -10,7 +10,7 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 
 export const Page = () => {
 
-    const { title, nodes, addNode, reorderNodes, setTitle } = useAppState()
+    const { title, nodes, addNode, reorderNodes, setTitle, cover, setPageCoverImage } = useAppState()
    
     const [ focussedNodeIndex, setFocussedNodeIndex ] = useFocussedNodeIndex({nodes});
 
@@ -46,7 +46,7 @@ export const Page = () => {
 
     return (
         <>
-            <Cover/>
+            <Cover filePath={cover} changePageCover={setPageCoverImage}/>
             <div>
                 {/* pass in addNode function as we want to add nodes as user finished editing title */}
                 <Title addNode={addNode} title={title} changePageTitle={setTitle}/>

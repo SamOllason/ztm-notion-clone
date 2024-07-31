@@ -1,7 +1,14 @@
 import { useRef, ChangeEventHandler } from "react"
 import styles from "./Cover.module.css"
+import { FileImage } from "../components/FileImage";
+import { uploadImage } from "../utils/uploadImage"
 
-export const Cover = () => {
+type CoverProps = {
+  filePath?: string;
+  changePageCover: (filePath: string) => void;
+};
+
+export const Cover = ({ filePath, changePageCover }: CoverProps) => {
     // we want an immutable ref here, so specify null as initial value
     const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -12,16 +19,23 @@ export const Cover = () => {
         fileInputRef.current?.click()
     }
 
-    const onCoverImageUpload: ChangeEventHandler<HTMLInputElement> = (event) => {
+    const onCoverImageUpload: ChangeEventHandler<HTMLInputElement> = async (event) => {
         const target = event.target;
-        console.log('onCoverImageUpload')
-        console.log(target?.files?.[0])
-    }
+            const result = await uploadImage(target?.files?.[0])
+    
+            if(result?.filePath){
+                // if here then upload was successful
+                changePageCover(result.filePath)
+            }
+      };
 
     return(
         <div className={styles.cover}>
-            <img src="/ztm-notes.png" alt="Cover" className={styles.image}/>
-
+            {filePath ? (
+                    <FileImage className={styles.image} filePath={filePath} />
+                ) : (
+                    <img src="/ztm-notes.png" alt="Cover" className={styles.image} />
+                )}
             {/* When click on button want to trigger click event on the input element below */}
             <button onClick={onChangeCoverImage} className={styles.button}>Change cover</button>
             {/* we want an 'invisible' input to have a custom bottom to allow user */}
