@@ -1,6 +1,5 @@
 import { Page } from "./Page/Page";
 import { AppStateProvider } from "./state/AppStateContext";
-import { createPage } from "./utils/createPage";
 import { Route, Routes } from "react-router-dom";
 import { Auth } from "./auth/Auth"
 import { Private } from "./auth/Private"
