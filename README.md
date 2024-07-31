@@ -6,7 +6,7 @@
 
 Following along with [this fantastic course](https://zerotomastery.io/courses/react-project-ideas-notion-clone/).
 
-Notion-like app that allows users to creat and edit notes and organize them in a tree structure.
+Notion-like app that allows users to create and edit notes and organize them in a tree structure.
 
 ## Features
 
