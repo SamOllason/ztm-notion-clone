@@ -8,7 +8,9 @@ type FileImageProps = {
 } & React.ImgHTMLAttributes<HTMLImageElement>
 
 export const FileImage = ({filePath, ...props}: FileImageProps) => {
-	const [image, setImage] = useState("")
+	// image is the url that we can use on src tag
+	const [ image, setImage ] = useState("")
+	// set to true to avoid blinking of the loader for a few ms
 	const [ loading, setLoading ] = useState(true)
 
 	useEffect(() => {
